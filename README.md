@@ -1,6 +1,6 @@
-# DevBoost README
+# InspireDev README
 
-Welcome to the **DevBoost** extension! DevBoost delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.
+Welcome to the **InspireDev** extension! InspireDev delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.
 
 ## Features
 
@@ -14,17 +14,17 @@ Welcome to the **DevBoost** extension! DevBoost delivers daily doses of motivati
 
 ## Extension Settings
 
-DevBoost provides several settings to tailor your experience:
+InspireDev provides several settings to tailor your experience:
 
-- **`devboost.language`**: Sets the language for the motivational quotes.
-- **`devboost.showOnStartup`**: Toggles whether a motivational quote is shown on startup.
-- **`devboost.notificationInterval`**: Configures the interval in minutes for displaying motivational notifications.
-- **`devboost.customQuotes`**: Allows you to add your own motivational quotes.
-- **`devboost.quoteFormat`**: Determines the format of the notification.
-- **`devboost.displayPosition`**: Specifies where to display the notification (notification or status bar).
-- **`devboost.playSound`**: Toggles sound for notifications.
-- **`devboost.soundVolume`**: Adjusts the volume of the notification sound.
-- **`devboost.soundName`**: Chooses the notification sound.
+- **`inspiredev.language`**: Sets the language for the motivational quotes.
+- **`inspiredev.showOnStartup`**: Toggles whether a motivational quote is shown on startup.
+- **`inspiredev.notificationInterval`**: Configures the interval in minutes for displaying motivational notifications.
+- **`inspiredev.customQuotes`**: Allows you to add your own motivational quotes.
+- **`inspiredev.quoteFormat`**: Determines the format of the notification.
+- **`inspiredev.displayPosition`**: Specifies where to display the notification (notification or status bar).
+- **`inspiredev.playSound`**: Toggles sound for notifications.
+- **`inspiredev.soundVolume`**: Adjusts the volume of the notification sound.
+- **`inspiredev.soundName`**: Chooses the notification sound.
 
 ## Release Notes
 
@@ -41,16 +41,20 @@ DevBoost provides several settings to tailor your experience:
 
 - Refined language options, updated and added new audio files, and fixed package.json.
 
+### 1.5.0
+
+- Renamed the extension to **InspireDev** to better reflect its purpose.
+
 ## Repository
 
-For more details, source code, or to contribute, visit our GitHub repository: [DevBoost GitHub Repository](https://github.com/UnTanukii/DevBoost). If you find DevBoost useful, please consider giving it a ⭐️ on GitHub!
+For more details, source code, or to contribute, visit our GitHub repository: [InspireDev GitHub Repository](https://github.com/UnTanukii/InspireDev). If you find InspireDev useful, please consider giving it a ⭐️ on GitHub!
 
 ## Contributing
 
-We welcome contributions! If you have suggestions or would like to help improve DevBoost, please open an issue or submit a pull request.
+We welcome contributions! If you have suggestions or would like to help improve InspireDev, please open an issue or submit a pull request.
 
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
-**Enjoy coding with DevBoost!**
+**Enjoy coding with InspireDev!**

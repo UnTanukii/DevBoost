@@ -1,8 +1,8 @@
 {
-  "name": "devboost",
-  "displayName": "DevBoost",
-  "description": "DevBoost delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.",
-  "version": "1.4.0",
+  "name": "inspiredev",
+  "displayName": "InspireDev",
+  "description": "InspireDev delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.",
+  "version": "1.5.0",
   "publisher": "UnTanukii",
   "license": "GPL-3.0-only",
   "author": {
@@ -19,7 +19,7 @@
   "keywords": [
     "quotes",
     "motivation",
-    "devboost",
+    "inspiredev",
     "boost",
     "inspiration",
     "coding",
@@ -33,14 +33,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "devboost.shuffleQuote",
+        "command": "inspiredev.shuffleQuote",
         "title": "Shuffle Quote"
       }
     ],
     "configuration": {
       "type": "object",
       "properties": {
-        "devboost.language": {
+        "inspiredev.language": {
           "type": "string",
           "description": "The language of the quotes",
           "enum": [
@@ -50,17 +50,17 @@
           ],
           "default": "en"
         },
-        "devboost.showOnStartup": {
+        "inspiredev.showOnStartup": {
           "type": "boolean",
           "description": "Show a motivational quote on startup",
           "default": true
         },
-        "devboost.notificationInterval": {
+        "inspiredev.notificationInterval": {
           "type": "number",
           "description": "Sets the interval (in minutes) for displaying motivational notifications during a coding session.",
           "default": 60
         },
-        "devboost.customQuotes": {
+        "inspiredev.customQuotes": {
           "type": "array",
           "description": "Add your own motivational quotes",
           "items": {
@@ -68,7 +68,7 @@
           },
           "default": []
         },
-        "devboost.quoteFormat": {
+        "inspiredev.quoteFormat": {
           "type": "string",
           "description": "Format of the notification",
           "enum": [
@@ -77,7 +77,7 @@
           ],
           "default": "%quote%"
         },
-        "devboost.displayPosition": {
+        "inspiredev.displayPosition": {
           "type": "string",
           "description": "Position of the notification",
           "enum": [
@@ -87,19 +87,19 @@
           ],
           "default": "notification"
         },
-        "devboost.playSound": {
+        "inspiredev.playSound": {
           "type": "boolean",
           "description": "Play a sound when a notification is displayed",
           "default": true
         },
-        "devboost.soundVolume": {
+        "inspiredev.soundVolume": {
           "type": "number",
           "description": "Volume of the notification sound",
           "default": 25,
           "minimum": 0,
           "maximum": 100
         },
-        "devboost.soundName": {
+        "inspiredev.soundName": {
           "type": "string",
           "description": "Notification sound",
           "enum": [
@@ -135,6 +135,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/UnTanukii/DevBoost"
+    "url": "https://github.com/UnTanukii/InspireDev"
   }
 }

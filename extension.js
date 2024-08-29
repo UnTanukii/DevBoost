@@ -19,7 +19,7 @@ function loadPackageJson() {
 }
 
 function getSoundName(){
-	const soundName = vscode.workspace.getConfiguration('devboost').get('soundName');
+	const soundName = vscode.workspace.getConfiguration('inspiredev').get('soundName');
 	const soundNames = {
 		'Never Back Down Never What?': 'never_back_down',
 		'Giga Chad Music': 'giga_chad_music',
@@ -33,8 +33,8 @@ function getSoundName(){
 }
 
 function playSound(){
-	const playSound = vscode.workspace.getConfiguration('devboost').get('playSound');
-	const soundVolume = (vscode.workspace.getConfiguration('devboost').get('soundVolume') || 100) / 100;
+	const playSound = vscode.workspace.getConfiguration('inspiredev').get('playSound');
+	const soundVolume = (vscode.workspace.getConfiguration('inspiredev').get('soundVolume') || 100) / 100;
 	if(playSound){
 		const soundPath = vscode.Uri.file(path.join(extensionContext.extensionPath, 'media', getSoundName())).fsPath;
 		sound.play(soundPath, soundVolume).catch(err => console.error('Error playing sound:', err));
@@ -42,9 +42,9 @@ function playSound(){
 }
 
 function updateQuote() {
-	const userLang = vscode.workspace.getConfiguration('devboost').get('language');
+	const userLang = vscode.workspace.getConfiguration('inspiredev').get('language');
 	let quotes = require(`./quotes/${userLang}.json`);
-	const configQuotes = vscode.workspace.getConfiguration('devboost').get('customQuotes') || [];
+	const configQuotes = vscode.workspace.getConfiguration('inspiredev').get('customQuotes') || [];
 	if(configQuotes.length > 0) {
 		quotes = quotes.concat(configQuotes);
 	}
@@ -55,7 +55,7 @@ function updateQuote() {
 }
 
 function format(quote){
-	const quoteFormat = vscode.workspace.getConfiguration('devboost').get('quoteFormat');
+	const quoteFormat = vscode.workspace.getConfiguration('inspiredev').get('quoteFormat');
 	return quoteFormat.replace(/%quote%/g, quote);
 }
 
@@ -68,14 +68,14 @@ function actionStatusBarItem(type) {
 		statusBarsItems['right'].dispose();
 	}else if(type === 'set'){
 		statusBarsItems['left'].tooltip='Click to hide'; 
-		statusBarsItems['left'].command='devboost.toggleStatusBarItem';
+		statusBarsItems['left'].command='inspiredev.toggleStatusBarItem';
 		statusBarsItems['right'].tooltip='Click to hide'; 
-		statusBarsItems['right'].command='devboost.toggleStatusBarItem';
+		statusBarsItems['right'].command='inspiredev.toggleStatusBarItem';
 	}
 }
 
 function displayQuote(quote) {
-	const quotePosition = vscode.workspace.getConfiguration('devboost').get('displayPosition');
+	const quotePosition = vscode.workspace.getConfiguration('inspiredev').get('displayPosition');
 	actionStatusBarItem('hide');
 	if(quotePosition === 'statusBar (left)') {
 		statusBarsItems['left'].text = format(quote);
@@ -101,8 +101,8 @@ function activate(context) {
 	////////////////////////////
 	// CONFIGURATION
 	////////////////////////////
-	const showOnStartup = vscode.workspace.getConfiguration('devboost').get('showOnStartup');
-	const notificationInterval = vscode.workspace.getConfiguration('devboost').get('notificationInterval');
+	const showOnStartup = vscode.workspace.getConfiguration('inspiredev').get('showOnStartup');
+	const notificationInterval = vscode.workspace.getConfiguration('inspiredev').get('notificationInterval');
 	////////////////////////////
 	// STATUS BAR ITEMS
 	////////////////////////////
@@ -116,10 +116,10 @@ function activate(context) {
 	////////////////////////////
 	if(showOnStartup){setTimeout(()=>{updateQuote()},1000)};
 	setInterval(() =>{updateQuote()}, notificationInterval * 1000 * 60);
-	const updateQuoteCommand = vscode.commands.registerCommand('devboost.shuffleQuote',function(){updateQuote()});
+	const updateQuoteCommand = vscode.commands.registerCommand('inspiredev.shuffleQuote',function(){updateQuote()});
 	// TOGGLE STATUS BAR ITEM COMMAND
-	const toggleStatusBarItemCommand = vscode.commands.registerCommand('devboost.toggleStatusBarItem', function () {
-		const quotePosition = vscode.workspace.getConfiguration('devboost').get('displayPosition');
+	const toggleStatusBarItemCommand = vscode.commands.registerCommand('inspiredev.toggleStatusBarItem', function () {
+		const quotePosition = vscode.workspace.getConfiguration('inspiredev').get('displayPosition');
 		if(quotePosition === 'statusBar (left)') {
 			statusBarsItems['left'].hide();
 		}else if(quotePosition === 'statusBar (right)') {
