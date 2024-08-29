@@ -1,7 +1,6 @@
 const vscode = require('vscode');
 const path = require('path');
 const sound = require('sound-play');
-const fs = require('fs');
 
 const statusBarsItems = [];
 let extensionContext;
