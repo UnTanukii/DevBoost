@@ -1,0 +1,110 @@
+{
+  "name": "devboost",
+  "displayName": "DevBoost",
+  "description": "DevBoost delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devboost.shuffleQuote",
+        "title": "Shuffle Quote"
+      },
+      {
+        "command": "devboost.changeLanguage",
+        "title": "Change Language"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "devboost.language": {
+          "type": "string",
+          "description": "The language of the quotes",
+          "enum": [
+            "auto",
+            "en",
+            "fr",
+            "es"
+          ],
+          "default": "auto"
+        },
+        "devboost.showOnStartup": {
+          "type": "boolean",
+          "description": "Show a motivational quote on startup",
+          "default": true
+        },
+        "devboost.notificationInterval": {
+          "type": "number",
+          "description": "Sets the interval (in minutes) for displaying motivational notifications during a coding session.",
+          "default": 60
+        },
+        "devboost.customQuotes": {
+          "type": "array",
+          "description": "Add your own motivational quotes",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "devboost.quoteFormat": {
+          "type": "string",
+          "description": "Format of the notification",
+          "enum": [
+            "%quote%",
+            "Quote - %quote%"
+          ],
+          "default": "%quote%"
+        },
+        "devboost.displayPosition": {
+          "type": "string",
+          "description": "Position of the notification",
+          "enum": [
+            "notification",
+            "statusBar (left)",
+            "statusBar (right)"
+          ],
+          "default": "notification"
+        },
+        "devboost.playSound": {
+          "type": "boolean",
+          "description": "Play a sound when a notification is displayed",
+          "default": true
+        },
+        "devboost.soundVolume": {
+          "type": "number",
+          "description": "Volume of the notification sound",
+          "default": 100,
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.92.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "sound-play": "^1.1.0"
+  }
+}
