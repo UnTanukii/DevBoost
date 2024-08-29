@@ -74,9 +74,9 @@
           "description": "Format of the notification",
           "enum": [
             "%quote%",
-            "Quote - %quote%"
+            "InspireDev - %quote%"
           ],
-          "default": "Quote - %quote%"
+          "default": "InspireDev - %quote%"
         },
         "inspiredev.displayPosition": {
           "type": "string",
