@@ -2,7 +2,7 @@
   "name": "inspiredev",
   "displayName": "InspireDev",
   "description": "InspireDev delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "icon": "media/icon.png",
   "publisher": "UnTanukii",
   "license": "GPL-3.0-only",
@@ -34,8 +34,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "inspiredev.shuffleQuote",
-        "title": "Shuffle Quote"
+        "command": "inspiredev.randomQuote",
+        "title": "InspireDev: Random Quote"
       }
     ],
     "configuration": {
@@ -76,7 +76,7 @@
             "%quote%",
             "Quote - %quote%"
           ],
-          "default": "%quote%"
+          "default": "Quote - %quote%"
         },
         "inspiredev.displayPosition": {
           "type": "string",
@@ -110,7 +110,8 @@
             "Oh oh oh Gotaga",
             "Dark Souls 3 - Boss Theme",
             "Never Give Up Your Waaaaaay",
-            "Just Do It (Shia LaBeouf)"
+            "Just Do It (Shia LaBeouf)",
+            "Random"
           ],
           "default": "Never Back Down Never What?"
         }

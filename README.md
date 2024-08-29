@@ -49,6 +49,12 @@ InspireDev provides several settings to tailor your experience:
 
 - Added a new logo for the extension.
 
+### 1.7.0
+
+- Added a random sound feature for notifications (`inspiredev.soundName`).
+- Changed the command from "Shuffle Quote" to "InspireDev: Random Quote" in VS Code.
+- Updated the default value for the `inspiredev.quoteFormat` setting.
+
 ## Repository
 
 For more details, source code, or to contribute, visit our GitHub repository: [InspireDev GitHub Repository](https://github.com/UnTanukii/InspireDev). If you find InspireDev useful, please consider giving it a ⭐️ on GitHub!
