@@ -2,7 +2,7 @@
   "name": "devboost",
   "displayName": "DevBoost",
   "description": "DevBoost delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.",
-  "version": "0.0.1",
+  "version": "1.3.0",
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -33,8 +33,7 @@
           "enum": [
             "auto",
             "en",
-            "fr",
-            "es"
+            "fr"
           ],
           "default": "auto"
         },
@@ -83,9 +82,22 @@
         "devboost.soundVolume": {
           "type": "number",
           "description": "Volume of the notification sound",
-          "default": 100,
+          "default": 50,
           "minimum": 0,
           "maximum": 100
+        },
+        "devboost.soundName": {
+          "type": "string",
+          "description": "Notification sound",
+          "enum": [
+            "Never Back Down Never What?",
+            "Sigma Music",
+            "Oh oh oh Gotaga",
+            "Dark Souls 3 - Boss Theme",
+            "Never Give Up Your Waaaaaay",
+            "Just Do It (Shia LaBeouf)"
+          ],
+          "default": "Never Back Down Never What?"
         }
       }
     }
@@ -106,5 +118,9 @@
   },
   "dependencies": {
     "sound-play": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UnTanukii/DevBoost"
   }
 }

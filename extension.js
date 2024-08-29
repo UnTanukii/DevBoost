@@ -1,23 +1,57 @@
 const vscode = require('vscode');
 const path = require('path');
 const sound = require('sound-play');
+const fs = require('fs');
 
 const statusBarsItems = [];
 let extensionContext;
+let packageJson;
+
+function loadPackageJson() {
+	const packageJsonPath = path.join(extensionContext.extensionPath, 'package.json');
+    fs.readFile(packageJsonPath, 'utf8', (err, data) => {
+        if (err) {
+            vscode.window.showErrorMessage("Error reading package.json: " + err.message);
+            return;
+        }
+		packageJson = JSON.parse(data);
+	});
+}
+
+function getSoundName(){
+	const soundName = vscode.workspace.getConfiguration('devboost').get('soundName');
+	const soundNames = {
+		'Never Back Down Never What?': 'never_back_down',
+		'Sigma Music': 'sigma_music',
+		'Oh oh oh Gotaga': 'gotaga',
+		'Dark Souls 3 - Boss Theme': 'boss_theme',
+		'Never Give Up Your Waaaaaay': 'never_give_up_japanese',
+		'Just Do It (Shia LaBeouf)': 'just_do_it',
+	};
+	return soundNames[soundName] + '.mp3';
+}
 
 function playSound(){
 	const playSound = vscode.workspace.getConfiguration('devboost').get('playSound');
 	const soundVolume = (vscode.workspace.getConfiguration('devboost').get('soundVolume') || 100) / 100;
 	if(playSound){
-		const soundPath = vscode.Uri.file(path.join(extensionContext.extensionPath, 'media', 'motivation_sound.mp3')).fsPath;
+		const soundPath = vscode.Uri.file(path.join(extensionContext.extensionPath, 'media', getSoundName())).fsPath;
 		sound.play(soundPath, soundVolume).catch(err => console.error('Error playing sound:', err));
 	}
 }
 
+function getLanguage(){
+	const supportedLanguages = (packageJson.contributes.configuration.properties['devboost.language'].enum);
+	supportedLanguages.splice(0,1);
+	const userLang = vscode.env.language;
+	const configLang = vscode.workspace.getConfiguration('devboost').get('language');
+	const language = configLang === 'auto' ? (supportedLanguages.includes(userLang) ? userLang : supportedLanguages[0]) : configLang;
+	return language;
+}
+
 function updateQuote() {
-	let quotes = [
-		'test test'
-	];
+	const userLang = getLanguage();
+	let quotes = require(`./quotes/${userLang}.json`);
 	const configQuotes = vscode.workspace.getConfiguration('devboost').get('customQuotes') || [];
 	if(configQuotes.length > 0) {
 		quotes = quotes.concat(configQuotes);
@@ -28,7 +62,10 @@ function updateQuote() {
 	playSound();
 }
 
-function format(quote){return quote.replace(/%quote%/g, quote);}
+function format(quote){
+	const quoteFormat = vscode.workspace.getConfiguration('devboost').get('quoteFormat');
+	return quoteFormat.replace(/%quote%/g, quote);
+}
 
 function displayQuote(quote) {
 	const quotePosition = vscode.workspace.getConfiguration('devboost').get('displayPosition');
@@ -39,7 +76,7 @@ function displayQuote(quote) {
 		statusBarsItems['right'].text = format(quote);
 		statusBarsItems['right'].show();
 	}else if(quotePosition === 'notification') {
-		vscode.window.showInformationMessage(format(quote), {modal: false}, 'Dismiss').then((value) => {
+		vscode.window.showInformationMessage(format(quote), {modal: false }, 'Dismiss').then((value) => {
 			if(value === 'Dismiss') {
 				return;
 			}
@@ -52,6 +89,7 @@ function displayQuote(quote) {
  */
 function activate(context) {
 	extensionContext = context;
+	loadPackageJson();
 	////////////////////////////
 	// CONFIGURATION
 	////////////////////////////
@@ -61,17 +99,17 @@ function activate(context) {
 	// STATUS BAR ITEMS
 	////////////////////////////
 	statusBarsItems['left'] = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
-	statusBarsItems['left'].tooltip = "Click to toggle visibility";
+	statusBarsItems['left'].tooltip = "Hide";
 	statusBarsItems['left'].command = "devboost.toggleStatusBarItem";
 	statusBarsItems['right'] = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
-	statusBarsItems['right'].tooltip = "Click to toggle visibility";
+	statusBarsItems['right'].tooltip = "Hide";
 	statusBarsItems['right'].command = "devboost.toggleStatusBarItem";
 	context.subscriptions.push(statusBarsItems['left'], statusBarsItems['right']);
 
 	////////////////////////////
 	// UPDATE QUOTE
 	////////////////////////////
-	if(showOnStartup){updateQuote()};
+	if(showOnStartup){setTimeout(()=>{updateQuote()},1000)};
 	setInterval(() =>{updateQuote()}, notificationInterval * 1000 * 60);
 	const updateQuoteCommand = vscode.commands.registerCommand('devboost.shuffleQuote',function(){updateQuote()});
 	// TOGGLE STATUS BAR ITEM COMMAND
