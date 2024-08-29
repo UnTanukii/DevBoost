@@ -4,11 +4,27 @@
   "description": "DevBoost delivers daily doses of motivation and humor, keeping you inspired and energized throughout your coding journey.",
   "version": "1.4.0",
   "publisher": "UnTanukii",
+  "license": "GPL-3.0-only",
+  "author": {
+    "name": "untanukii",
+    "discord": "@untanukii",
+    "twitter": "@untanukii"
+  },
   "engines": {
     "vscode": "^1.92.0"
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "quotes",
+    "motivation",
+    "devboost",
+    "boost",
+    "inspiration",
+    "coding",
+    "programming",
+    "humor"
   ],
   "activationEvents": [
     "onStartupFinished"
