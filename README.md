@@ -45,6 +45,10 @@ InspireDev provides several settings to tailor your experience:
 
 - Renamed the extension to **InspireDev** to better reflect its purpose.
 
+### 1.6.0
+
+- Added a new logo for the extension.
+
 ## Repository
 
 For more details, source code, or to contribute, visit our GitHub repository: [InspireDev GitHub Repository](https://github.com/UnTanukii/InspireDev). If you find InspireDev useful, please consider giving it a ⭐️ on GitHub!
