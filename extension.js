@@ -22,6 +22,7 @@ function getSoundName(){
 	const soundName = vscode.workspace.getConfiguration('devboost').get('soundName');
 	const soundNames = {
 		'Never Back Down Never What?': 'never_back_down',
+		'Giga Chad Music': 'giga_chad_music',
 		'Sigma Music': 'sigma_music',
 		'Oh oh oh Gotaga': 'gotaga',
 		'Dark Souls 3 - Boss Theme': 'boss_theme',
@@ -40,17 +41,8 @@ function playSound(){
 	}
 }
 
-function getLanguage(){
-	const supportedLanguages = (packageJson.contributes.configuration.properties['devboost.language'].enum);
-	supportedLanguages.splice(0,1);
-	const userLang = vscode.env.language;
-	const configLang = vscode.workspace.getConfiguration('devboost').get('language');
-	const language = configLang === 'auto' ? (supportedLanguages.includes(userLang) ? userLang : supportedLanguages[0]) : configLang;
-	return language;
-}
-
 function updateQuote() {
-	const userLang = getLanguage();
+	const userLang = vscode.workspace.getConfiguration('devboost').get('language');
 	let quotes = require(`./quotes/${userLang}.json`);
 	const configQuotes = vscode.workspace.getConfiguration('devboost').get('customQuotes') || [];
 	if(configQuotes.length > 0) {
@@ -67,8 +59,24 @@ function format(quote){
 	return quoteFormat.replace(/%quote%/g, quote);
 }
 
+function actionStatusBarItem(type) {
+	if(type === 'hide') {
+		statusBarsItems['left'].hide();
+		statusBarsItems['right'].hide();
+	}else if(type === 'dispose') {
+		statusBarsItems['left'].dispose();
+		statusBarsItems['right'].dispose();
+	}else if(type === 'set'){
+		statusBarsItems['left'].tooltip='Click to hide'; 
+		statusBarsItems['left'].command='devboost.toggleStatusBarItem';
+		statusBarsItems['right'].tooltip='Click to hide'; 
+		statusBarsItems['right'].command='devboost.toggleStatusBarItem';
+	}
+}
+
 function displayQuote(quote) {
 	const quotePosition = vscode.workspace.getConfiguration('devboost').get('displayPosition');
+	actionStatusBarItem('hide');
 	if(quotePosition === 'statusBar (left)') {
 		statusBarsItems['left'].text = format(quote);
 		statusBarsItems['left'].show();
@@ -99,11 +107,8 @@ function activate(context) {
 	// STATUS BAR ITEMS
 	////////////////////////////
 	statusBarsItems['left'] = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
-	statusBarsItems['left'].tooltip = "Hide";
-	statusBarsItems['left'].command = "devboost.toggleStatusBarItem";
 	statusBarsItems['right'] = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
-	statusBarsItems['right'].tooltip = "Hide";
-	statusBarsItems['right'].command = "devboost.toggleStatusBarItem";
+	actionStatusBarItem('set');
 	context.subscriptions.push(statusBarsItems['left'], statusBarsItems['right']);
 
 	////////////////////////////
@@ -127,8 +132,7 @@ function activate(context) {
 }
 
 function deactivate() {
-	if(statusBarsItems['left']){statusBarsItems['left'].dispose()};
-	if(statusBarsItems['right']){statusBarsItems['right'].dispose()};
+	actionStatusBarItem('dispose');
 }
 
 module.exports = {
