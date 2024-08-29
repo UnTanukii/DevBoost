@@ -5,18 +5,6 @@ const fs = require('fs');
 
 const statusBarsItems = [];
 let extensionContext;
-let packageJson;
-
-function loadPackageJson() {
-	const packageJsonPath = path.join(extensionContext.extensionPath, 'package.json');
-    fs.readFile(packageJsonPath, 'utf8', (err, data) => {
-        if (err) {
-            vscode.window.showErrorMessage("Error reading package.json: " + err.message);
-            return;
-        }
-		packageJson = JSON.parse(data);
-	});
-}
 
 function getSoundName(){
 	const soundName = vscode.workspace.getConfiguration('inspiredev').get('soundName');
@@ -98,7 +86,6 @@ function displayQuote(quote) {
  */
 function activate(context) {
 	extensionContext = context;
-	loadPackageJson();
 	////////////////////////////
 	// CONFIGURATION
 	////////////////////////////
